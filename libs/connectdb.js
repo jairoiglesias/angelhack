@@ -43,22 +43,6 @@ var port = 0;
 
 module.exports = function(){
 
-	// var MongoClient = require('mongodb').MongoClient;
-
-	// MongoClient.connect('mongodb://heroku_68zc1kd4:i4shak80loe4avq30n20ik1ak5@ds129013.mlab.com:29013/heroku_68zc1kd4', function(err, db) {
-	// if (err) {
-	// 	throw err;
-	// }
-
-	// console.log('MongoDb conectado com sucesso')
-	// console.log('=========================================================')
-
-	
-	
-	// return MongoClient
-
-	// })
-
 	var mongoose = require('mongoose')
 	mongoose.Promise = global.Promise
 
@@ -71,10 +55,15 @@ module.exports = function(){
 		// ### Registra Schemas ###
 
 		// Perguntas
-		var perguntasSchema = new mongoose.Schema()
-		mongoose.model('Perguntas', perguntasSchema)
+		var perguntasSchema = new mongoose.Schema({
+			Question: String,
+			Tip: String,
+			Required: String,
+			Options: Array,
+			Form: Number
+		})
 
-		
+		mongoose.model('Perguntas', perguntasSchema)
 
 
 	})

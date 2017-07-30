@@ -12,10 +12,16 @@ module.exports = function(app){
 
   app.get('/recupera_perguntas', function(req, res){
 
-      var Perguntas = db.model('Perguntas')
-      Perguntas.find({}, function(err, docs){
-      	res.send(docs)
-      })
+    var formIndex = req.query.formIndex;
+  
+    var Perguntas = db.model('Perguntas')
+    
+    Perguntas.find({Form:formIndex}, function(err, docs){
+      if(err){
+        throw err
+      }
+      res.send(docs);
+    })
 
   })
 
@@ -29,6 +35,10 @@ module.exports = function(app){
 
     res.render('dashboards')
 
+  })
+
+  app.get('/perguntas', function(req, res){
+    res.render('perguntas')
   })
 
   app.get('/atendimentos_dashboard', function(req, res){

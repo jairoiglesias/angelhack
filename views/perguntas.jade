@@ -47,120 +47,108 @@ block content
     }
 
     #div_container{
-      width:80%;
+      width:90%;
       height:560px;
       float:right;
       overflow:auto;
+      padding:10px
     }
 
   
   script(type="text/javascript").
 
-    var totalConsultas = 0
+    function listaPerguntas(formIndex, idDiv){
 
-    function atualizaListaConsultas(){
+      $(idDiv).html('')
 
-        var promise = $.ajax({
-          url: 'atendimentos_lista'
-        });
+      var promise = $.ajax({
+        url: 'recupera_perguntas',
+        data: {
+          formIndex: formIndex
+        }
+
+      })
+
+      promise.then(function(results){
+
+        var html = '<form name="form1">'
         
-        promise.then(function(registros){
-          
-          if(registros.length > totalConsultas){
-            alertify.success('Novas consultas foram cadastradas')
-          }
+        results.forEach(function(value, index){
 
-          totalConsultas = registros.length
-          
-          var contentTable
-          
-          var headerFill = false;
-          var content = '<tbody>';
-          
-          registros.forEach(function(registro){
-            
-            if (!headerFill) {
-              contentTable = '<thead><tr>'
-              
-              for(var i = 0; i < Object.keys(registro).length; i++){
-                contentTable += '<th>'+Object.keys(registro)[i].toUpperCase()+'</th>'
-              }
-              
-              contentTable += '</tr></thead>'
-              
-              headerFill = true;
-            } 
-            
-            contentTable += '<tr>'
-            
-            for(var index in registro){
-              
-              if (index == 'anexo'){
-                contentTable += '<td style="text-decorationo:none"><a class="anexo">'+registro[index]+'<a/></td>'
-              }
-              else{
-                contentTable += '<td>'+registro[index]+'</td>'
-              }
-            }
-            
-            contentTable += '</tr>'
-            
-          });
-          
-          contentTable += '</tbody>'
-          
-          $('#lista_prestacoes').children().remove();
-          $('#lista_prestacoes').append(contentTable);
+          var upload = value.Upload
 
-          $('#lista_prestacoes tr').animate({ "position":"fixed", "left": "+=50px" }, "slow" );
+          if(upload == undefined){
 
-          $('#lista_prestacoes').find('tr').each(function(index, row){
-            
-            // Recupera o vereador que foi informado no campo
-            var textSearch = $('#text_search').val().toUpperCase();
-            
-            if(textSearch.length != 0){
+            var totalOptions = value.Options.length
 
-              var found = false
-
-              $(row).find('td').each(function(index, column){
-                var curText = $(column).text().toUpperCase()
-
-                if (curText.indexOf(textSearch) != -1){
-                  found = true
-                }
-
-              })
-
-              if(found === true){
-                row.style.display = 'table-row'
-              }
-              else{
-                row.style.display = 'none'
-              }
-
+            if(totalOptions == 0){
+              html += '<input class="form-control" type="text" id="' + value._id + '" placeholder="' + value['Question '] + '" /><br />'
             }
             else{
-              row.style.display = 'table-row'
+
+              var options = '<option value ="-1">'+value['Question ']+'</option>'
+              
+              value.Options.forEach(function(option, index){
+                options += '<option value="'+option+'">' + option + '</option>'
+              })
+
+              html += '<select class="form-control" id="' + value._id + '">'+options+'</select><br />'
             }
-            
-          })
-          
-        });
+          }
+          else{
+            html += '<input class="form-control" type="file" id="' + value._id + '" placeholder="' + value['Question '] + '" /><br />'
+          }
+
+        })
+
+        html += '</form>'
+
+        $(idDiv).append(html)
+
+
+      })
+
     }
   
     $(document).ready(function(){
-        
-      
-      
-      $('#btn_exportar_csv').click(function(){
 
-    		$("#lista_prestacoes").table2csv();
-        
+      listaPerguntas(1, '#div_perguntas_01')
+
+      $('#fullpage').fullpage({
+        controlArrows: false
+      })
+
+      $('.fp-slides').css({
+        'overflow-y' : 'scroll',
+        'height' : '80%'
+      })   
+
+      $('#btn_voltar').click(function(e){
+
+        console.log('Proximo slide ...')
+        $.fn.fullpage.moveSlideLeft();
+
+        listaPerguntas(1, '#div_perguntas_01')
+      })
+
+      $('#btn_continuar').click(function(e){
+
+        console.log('Proximo slide ...')
+        $.fn.fullpage.moveSlideRight();
+
+        listaPerguntas(2, '#div_perguntas_02')
       })
       
-    })
+    })  
 
-
-  div(id='div_container')
-    div(id='div_perguntas')
+  
+  div(class='container')
+    input(id='btn_voltar' type='button' value='Voltar')
+    input(id='btn_continuar' type='button' value='Continuar')
+    hr
+    div(id='fullpage')
+      div(class='section')
+        div(class='slide')
+          div(id='div_perguntas_01')
+        div(class='slide')
+          div(id='div_perguntas_02')
