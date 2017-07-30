@@ -33,9 +33,24 @@ module.exports = function(app){
       if(err){
         throw err
       }
-      res.send(docs);
+
+      var temp = docs.slice(1, 20)
+
+      res.send(temp);
     })
 
+  })
+
+  app.get('/', function(req, res){
+    res.render('index')
+  })
+
+  app.get('/index', function(req, res){
+    res.render('index')
+  })
+
+  app.get('/detalhe_startup', function(req, res){
+    res.render('detalhe_startup')
   })
 
   app.get('/login', function(req, res){

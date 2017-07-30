@@ -7,7 +7,6 @@ block content
     #startups-lista div.startup-card{
       margin-top: 20px;
     }
-
   
   script(type="text/javascript").
   
@@ -27,7 +26,7 @@ block content
 
           results.forEach(function(value, index){
             
-            html += '<div class="col-xs-4" style="white-space: nowrap;margin-top:10px;padding-left:0"><p><small class="type-startup">'+value.Categorias+'</small></p></div>'
+            html += '<div class="col-xs-8" style="white-space: nowrap;margin-top:10px;padding-left:0; "><p><small class="type-startup">'+value.Categorias+'</small></p></div>'
 
           })
 
@@ -35,7 +34,7 @@ block content
 
 
           // Cria evento de filtro para cada tag
-          $(idDiv).find('div.col-xs-4').each(function(index, row){
+          $(idDiv).find('div.col-xs-3').each(function(index, row){
 
             $(this).click(function(){
               
@@ -81,7 +80,7 @@ block content
         
         if(textSearch.length != 0){
 
-          $('#categorias-lista').find('div.col-xs-4').each(function(index, row){
+          $('#categorias-lista').find('div.col-xs-3').each(function(index, row){
 
             var found = false
 
@@ -108,7 +107,7 @@ block content
           })
         }
         else{
-          $('#categorias-lista').find('div.col-xs-4').each(function(index, row){
+          $('#categorias-lista').find('div.col-xs-3').each(function(index, row){
              $(this).find('small.type-startup').css({
                 background: 'white',
                 color: '#999999'
@@ -117,6 +116,10 @@ block content
         }
           
       }
+
+      $('#startups-lista').find('div.coluna-card').click(function(e){
+        window.location.href = 'detalhe_startup'
+      })
 
       listaCategorias('#categorias-lista')
 
@@ -145,7 +148,8 @@ block content
 
       nav.navbar.navbar-default.navbar-fixed-top
         .navbar-header
-          a.navbar-brand(href='#') searchMatch
+          a.navbar-brand(href='#')
+            img(src="images/logos/logo.png" alt="" height="40" width="130" style="margin-left: 20px; margin-top: 0 0 0 15px;")
         div(style='margin-right:20px')
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav.navbar-right
@@ -166,7 +170,7 @@ block content
               
       div(id='startups-lista' class='col-xs-7 rigth-side')
         .startup-line
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/nubank.png', alt='Card image cap')
                 .card-block.bloco-card
@@ -174,7 +178,7 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/polish.png', alt='Card image cap')
                 .card-block.bloco-card
@@ -182,7 +186,7 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/next.png', alt='Card image cap')
                 .card-block.bloco-card
@@ -190,7 +194,7 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/tesla.jpeg', alt='Card image cap')
                 .card-block.bloco-card
@@ -198,7 +202,7 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/soundcloud.jpeg', alt='Card image cap')
                 .card-block.bloco-card
@@ -206,7 +210,7 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/indiegogo.png', alt='Card image cap')
                 .card-block.bloco-card
@@ -214,23 +218,31 @@ block content
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
-                img.card-img-top.img-responsive(src='images/nexcity.jpeg', alt='Card image cap')
+                img.card-img-top.img-responsive(src='images/Alibaba.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Comercio Eletronico
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-3.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/Dollar Shave Club.jpg', alt='Card image cap')
                 .card-block.bloco-card
                   h4.card-title.text-center Card title
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
-                img.card-img-top.img-responsive(src='images/publix.png', alt='Card image cap')
+                img.card-img-top.img-responsive(src='images/Instagram.jpg', alt='Card image cap')
                 .card-block.bloco-card
                   h4.card-title.text-center Card title
                   p.card-text.text-center
                     | Some quick example text to build on the card title and make up the bulk of the card's content.
                   a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
-            .col-xs-4.coluna-card
+            .col-xs-3.coluna-card
               .card.startup-card(style='width: 20rem;')
                 img.card-img-top.img-responsive(src='images/swiggy.png', alt='Card image cap')
                 .card-block.bloco-card

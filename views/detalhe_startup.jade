@@ -1,0 +1,87 @@
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel='stylesheet', href='stylesheets/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='./node_modules/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='stylesheets/start-details.css')
+    title Document
+  body
+    header
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') Detalhes
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='../navbar-static-top/') Vagas
+              li.active
+                a(href='./')
+                  | Sair 
+                  span
+          // /.nav-collapse
+    hr
+    main.container.main-container-startup
+      .row
+        .col-xs-8
+          h1 Nubank
+          h5
+            b Modalidade
+            |  : Fintech
+          h6
+            b Slogan
+            |  : A nova geração de serviços financeiros no Brasil
+          br
+          | 				Nubank é uma empresa startup brasileira de serviços financeiros, atuando como operadora de cartões de crédito com operações no Brasil, sediada em São Paulo e fundada em 6 de maio de 2013 por David Vélez. Seu produto é o cartão Nubank Mastercard sem tarifas ou anuidade. A primeira compra realizada com um cartão Nubank ocorreu em 1º de abril de 2014.
+          h2 Socios
+          p David Vélez (CEO), Edward Wible (co-fundador), Cristina Junqueira(co-fundadora).
+          h2 Tempo de Operação
+          p
+            | Fundada em 06 de maio de 2013 (4 anos).
+          hr
+          h2 Fotos da empresa
+          .fotos
+            .row
+              .col-xs-3
+                img(src='images/nu1.jpg', alt='', height='100', width='130')
+              .col-xs-3
+                img(src='images/nu2.jpg', alt='', height='100', width='130')
+              .col-xs-3
+                img(src='images/nu3.jpg', alt='', height='100', width='130')
+              .col-xs-3
+                img(src='images/nu4.jpg', alt='', height='100', width='130')
+        .col-xs-4
+          .card.card-startup-details
+            img.card-img-top(src='./images/nubank.png', alt='', height='250', width='375')
+            .card-block
+              h4.card-title Nubank S.A
+              p.card-text
+                b Funcionarios :
+                |  340
+              p.card-text
+                b Valuation :
+                |  US$ 500 milhões.
+              p.card-text
+                b Sede:
+                |  Brasil
+              p.card-text
+                b Rodadas de Investimento:
+                |  6
+            .card-footer
+              .jumbotron.custom-jumbotron
+                p.text-center 	Acompanhe a empresa
+                .social-media
+                  a(href='https://www.facebook.com/nubankbrasil/')
+                    i.fa.fa-facebook.fa-2x(aria-hidden='true', style='color: #3b5998; cursor: pointer;')
+                  a(href='https://twitter.com/nubankbrasil?lang=pt')
+                    i.fa.fa-twitter.fa-2x(aria-hidden='true', style='color: #00aced;cursor: pointer; ')
+                  a(href='https://plus.google.com/+NubankBrasil')
+                    i.fa.fa-google-plus.fa-2x(aria-hidden='true', style='color: #dd4b39; cursor: pointer;')
