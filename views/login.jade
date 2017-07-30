@@ -1,0 +1,35 @@
+extends layout_login
+
+block content
+
+  style(type="text/css").
+    
+
+  
+  script(type="text/javascript").
+  
+    $(document).ready(function(){
+
+      
+      
+    })  
+
+  
+  .container
+    .col-xs-7
+    .col-xs-5
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title.text-center Login
+        .panel-body
+          form(accept-charset='UTF-8', role='form')
+            fieldset
+              .form-group
+                input.form-control(placeholder='Usuario', name='email', type='text')
+              .form-group
+                input.form-control(placeholder='Senha', name='password', type='password', value='')
+              .checkbox
+                label
+                  input(name='remember', type='checkbox', value='Lembre me')
+                  |  Lembre me
+              input.btn.btn-lg.btn-success.btn-block.btn-login(type='submit', value='Login')

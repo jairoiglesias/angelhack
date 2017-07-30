@@ -4,7 +4,7 @@ html, body {
  display: flex;
  align-items: center;
  justify-content: center;
- background: url('../images/start2.jpg');
+ background: url('../start2.jpg');
  background-size: 100% 100%;
  background-position: center;
  opacity: 1.2;

@@ -63,7 +63,13 @@ module.exports = function(){
 			Form: Number
 		})
 
+		// Categorias
+		var categoriasSchema = new mongoose.Schema({
+			Categoria: String
+		})
+
 		mongoose.model('Perguntas', perguntasSchema)
+		mongoose.model('Categorias', categoriasSchema)
 
 
 	})

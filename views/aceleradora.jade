@@ -1,0 +1,240 @@
+extends layout
+
+block content
+
+  style(type="text/css").
+    
+    #startups-lista div.startup-card{
+      margin-top: 20px;
+    }
+
+  
+  script(type="text/javascript").
+  
+    $(document).ready(function(){
+
+      function listaCategorias(idDiv){
+
+        var promise = $.ajax({
+          url: 'recupera_categorias'
+        })
+
+        promise.then(function(results){
+
+          $(idDiv).html('')
+
+          var html = ''
+
+          results.forEach(function(value, index){
+            
+            html += '<div class="col-xs-4" style="white-space: nowrap;margin-top:10px;padding-left:0"><p><small class="type-startup">'+value.Categorias+'</small></p></div>'
+
+          })
+
+          $(idDiv).append(html)
+
+
+          // Cria evento de filtro para cada tag
+          $(idDiv).find('div.col-xs-4').each(function(index, row){
+
+            $(this).click(function(){
+              
+              var categoria = $(this).text()
+              filtraStartups(categoria)
+
+            })
+
+          })
+
+        })
+
+      }
+
+      function filtraStartups(categoriaProcurada){
+
+        $('#startups-lista').find('div.coluna-card').each(function(index, div){
+          
+          var categoriaCard = $(this).find('h4.card-title').text()
+          
+          if(categoriaCard != categoriaProcurada){
+            $(this).css({
+              display : 'none'
+            })
+          }
+          else{
+            $(this).css({
+              display : 'flex'
+            })
+          }
+
+        })
+
+      }
+
+      function pesquisaCategoriaEmTags(){
+
+        console.log('Iniciando varredura de tags')
+
+        var textSearch = $('#pesquisa_categoria').val().toUpperCase()
+
+        console.log(textSearch)
+        
+        if(textSearch.length != 0){
+
+          $('#categorias-lista').find('div.col-xs-4').each(function(index, row){
+
+            var found = false
+
+            var categoria = $(row).text().toUpperCase()
+
+            if(categoria.indexOf(textSearch) != -1){
+              console.log(categoria, textSearch)
+              found = true
+            }
+
+            if(found === true){
+              $(this).find('small.type-startup').css({
+                background: 'rgba(63, 81, 181, 0.63)',
+                color: 'white'
+              })
+            }
+            else{
+              $(this).find('small.type-startup').css({
+                background: 'white',
+                color: '#999999'
+              })
+            }
+
+          })
+        }
+        else{
+          $('#categorias-lista').find('div.col-xs-4').each(function(index, row){
+             $(this).find('small.type-startup').css({
+                background: 'white',
+                color: '#999999'
+            })
+          })
+        }
+          
+      }
+
+      listaCategorias('#categorias-lista')
+
+      $('#pesquisa_categoria').keyup(function(){
+
+        $('#startups-lista').find('div.coluna-card').each(function(index, div){
+          
+          $(this).css({
+            display : 'flex'
+          })
+
+        })
+
+        setTimeout(function(){
+          pesquisaCategoriaEmTags()
+        }, 350)
+
+      })
+      
+      
+    })  
+
+  
+  header
+    .container
+
+      nav.navbar.navbar-default.navbar-fixed-top
+        .navbar-header
+          a.navbar-brand(href='#') searchMatch
+        div(style='margin-right:20px')
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav.navbar-right
+              li.active
+                a(href='./')
+                  | Sair
+                  span.sr-only (current)
+  hr
+  div(id='categorias' class='container main-container-acelera')
+    .row
+      .col-xs-5.search-area.left-side
+        .box
+          .row
+            .col-xs-12
+              input.form-control.input-search(type='search', placeholder='Efetue a busca', id='pesquisa_categoria')
+          hr
+          div(id='categorias-lista' class='tag-box')
+              
+      div(id='startups-lista' class='col-xs-7 rigth-side')
+        .startup-line
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/nubank.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Banking
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/polish.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Animation
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/next.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Entertainment
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/tesla.jpeg', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Automotive
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/soundcloud.jpeg', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Musica
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/indiegogo.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center crowdfunding
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/nexcity.jpeg', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Card title
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/publix.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Card title
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...
+            .col-xs-4.coluna-card
+              .card.startup-card(style='width: 20rem;')
+                img.card-img-top.img-responsive(src='images/swiggy.png', alt='Card image cap')
+                .card-block.bloco-card
+                  h4.card-title.text-center Card title
+                  p.card-text.text-center
+                    | Some quick example text to build on the card title and make up the bulk of the card's content.
+                  a.btn.btn-primary.btn-block.btn-detalhes(href='#') Detalhes...

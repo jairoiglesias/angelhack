@@ -15,7 +15,7 @@ module.exports = function(app){
     var formIndex = req.query.formIndex;
   
     var Perguntas = db.model('Perguntas')
-    
+
     Perguntas.find({Form:formIndex}, function(err, docs){
       if(err){
         throw err
@@ -23,6 +23,27 @@ module.exports = function(app){
       res.send(docs);
     })
 
+  })
+
+  app.get('/recupera_categorias', function(req, res){
+
+    var Categorias = db.model('Categorias')
+
+    Categorias.find({}, function(err, docs){
+      if(err){
+        throw err
+      }
+      res.send(docs);
+    })
+
+  })
+
+  app.get('/login', function(req, res){
+    res.render('login')
+  })
+
+  app.get('/aceleradora', function(req, res){
+    res.render('aceleradora')
   })
 
   app.get('/contratos', function(req, res){
